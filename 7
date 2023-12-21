@@ -1,0 +1,78 @@
+#Вводятся К целых чисел. Составьте все возможные списки из этих чисел.
+import itertools
+class Combination:
+    def __init__(self, c, v, s, l, z):
+
+        self.c=c
+        self.v=v
+        self.s=s
+        self.l=l
+        self.z=z
+
+    def proverka(self, c, z, k):
+        while k == '':
+            print('Вы ничего не ввели, введите одно или несколько целых простых чисел')
+            k = input("Введите целые простые числа, разделенные пробелами: ")
+        while c == 0:
+            a = k.split()
+            for i in a:
+                try:
+                    f = int(i)
+                    if type(f) == int:
+                        z += 1
+                    if z == len(a):
+                        c += 1
+                except ValueError:
+                    print(
+                        'Вы ввели одно или несколько не целых не простых чисел, или же ввели один или несколько других символов, вводите только целые простые числа')
+                    k = input('Введите целые числа, разделенные пробелами: ')
+                    break
+
+    def dop_fun(self, s):
+        b=len(a)
+        n=b
+        count=1
+        m=0
+        while n!=0:
+            count=count*n
+            n-=1
+        while count!=m:
+            for i in a:
+                s+=int(i)
+            m+=1
+        s=s/(count*b)
+        com_set = itertools.permutations(a)
+        for i in com_set:
+            print(i)
+        print('Всего комбинаций: '+str(count))
+        print('Сумма всех чисел из всех комбинаций, поделённая на количество чисел из всех всех комбинаций: '+str(s))
+
+c=0
+v=0
+s=0
+l=0
+z=0
+e=[]
+a=[]
+
+k = input("Введите целые простые числа, разделенные пробелами: ")
+b=len(a)
+while l != b:
+    a = k.split()
+    for i in a:
+        d = a.index(i)
+        for x in range(2, int(i) // 2 + 1):
+            if (int(i) % x != 0):
+                a = a
+            else:
+                a.pop(d)
+                break
+    if len(a) != 0:
+        l += 1
+    else:
+        a=[]
+        print('В списке нет простых чисел, поэтому и комбинаций нет')
+        k = input('Введите одно или несколько простых чисел, разделенные пробелами: ')
+a1=Combination(c, v, s, l, z)
+a2=a1.proverka(c, z, k)
+a3=a1.dop_fun(s)
